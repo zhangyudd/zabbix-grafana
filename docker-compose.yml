@@ -30,7 +30,7 @@ services:
       MYSQL_PASSWORD: "mysql57"
       ZBX_SERVER_HOST: "server"
     volumes:
-     - ./zabbix/graphfont.ttf:/usr/share/zabbix/fonts/graphfont.ttf
+     - ./zabbix/simhei.ttf:/usr/share/zabbix/assets/fonts/DejaVuSans.ttf 
      - /etc/localtime:/etc/localtime:ro
     ports:
      - "10052:80"

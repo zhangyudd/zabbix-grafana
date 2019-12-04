@@ -1,0 +1,36 @@
+*.sublime-workspace
+*.sublime-project
+
+.idea/
+.vscode
+
+*.bat
+
+# Grafana linter config
+# .jshintrc
+# .jscs.json
+# .jsfmtrc
+
+# Builded docs
+docs/site/
+
+# Tests
+dist/test/
+dist/test-setup/
+
+vendor
+src/vendor
+src/vendor/npm
+node_modules
+coverage/
+/tmp
+
+# Tools logs
+npm-debug.log
+yarn-error.log
+
+# Built plugin
+dist/
+
+# locally required config files
+public/css/*.min.css

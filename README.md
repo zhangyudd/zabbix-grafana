@@ -1,5 +1,7 @@
 # zabbix-grafana
 
+git clone https://github.com/zhangyudd/zabbix-grafana.git
+
 chmod 777 grafana/grafana.db
 docker-compose up -d
 

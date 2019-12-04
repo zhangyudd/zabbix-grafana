@@ -9,8 +9,10 @@ services:
       DB_SERVER_HOST: "db"
       MYSQL_USER: "root"
       MYSQL_PASSWORD: "mysql57"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     ports:
-     - "10051:10051"
+      - "10051:10051"
     user: root
     networks:
       default:
@@ -29,6 +31,7 @@ services:
       ZBX_SERVER_HOST: "server"
     volumes:
      - ./zabbix/graphfont.ttf:/usr/share/zabbix/fonts/graphfont.ttf
+     - /etc/localtime:/etc/localtime:ro
     ports:
      - "10052:80"
     user: root
@@ -49,6 +52,7 @@ services:
      - "10053:3306"
     volumes:
      - ./zabbix/mysql:/var/lib/mysql
+     - /etc/localtime:/etc/localtime:ro
     networks:
       default:
         aliases:

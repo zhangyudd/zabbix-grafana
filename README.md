@@ -36,8 +36,18 @@ Grafana添加数据源(zabbix_mysql,zabbix)：
   application	$group.$host.*
   iteams			$group.$host.$application.*
 
-Add panel:
+  Add panel:
   items语法:
     /CPU/  # 代表所有cpu的值
     /: (.*) space/  # 代表开头为: 结尾space的所有值
     如果单位显示有误，需要调整y轴单位Unit
+
+  批量添加流量图：
+    有时候我们需要将所有的流量图都放到一个dashboard中，手动添加太繁琐，可以通过json文件添加
+	1、先添加2个模板图
+	2、复制json文件编辑，添加节点（http://www.bejson.com/jsoneditoronline/）
+	3、需要改的字段如下(版本不同可能字段不同，需要先观察)：
+		panels下复制一个节点，0,1,2
+		gridPos(决定图的位置)
+		targets(修改组，主机，键值)
+		title(标题头)

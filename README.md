@@ -1,10 +1,10 @@
 # zabbix-grafana  
-`
-git clone https://github.com/zhangyudd/zabbix-grafana.git  
+  
+[仓库地址](https://github.com/zhangyudd/zabbix-grafana.git "悬停显示")  
 
-chmod 777 grafana/grafana.db   
-docker-compose up -d   
-`
+`chmod 777 grafana/grafana.db `   
+`docker-compose up -d`     
+
 >Zabbix  
 >>	登录ip:10052，帐号为Admin，密码为zabbix  
 

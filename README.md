@@ -1,18 +1,18 @@
 # zabbix-grafana  
 
 git clone https://github.com/zhangyudd/zabbix-grafana.git  
-`
-chmod 777 grafana/grafana.db  
-docker-compose up -d  
-`
-Zabbix  
-    登录ip:10052，帐号为Admin，密码为zabbix  
 
-如果zabbix图形有乱码：  
-	docker cp simhei.ttf zabbix-server:/usr/share/zabbix/fonts/DejaVuSans.ttf   
+chmod 777 grafana/grafana.db   
+docker-compose up -d   
 
-zabbix导入端口自动发现配置文件：  
-	port_discovery_templates.xml  
+>Zabbix  
+>>	登录ip:10052，帐号为Admin，密码为zabbix  
+
+>如果zabbix图形有乱码：  
+>>	docker cp simhei.ttf zabbix-server:/usr/share/zabbix/fonts/DejaVuSans.ttf   
+
+>zabbix导入端口自动发现配置文件：  
+>>	port_discovery_templates.xml  
 
 Grafana：  
 	web ip:3000，默认帐号admin/admin  

@@ -12,6 +12,11 @@
 >如果zabbix图形有乱码：  
 >>	docker cp simhei.ttf zabbix-server:/usr/share/zabbix/fonts/DejaVuSans.ttf   
 
+
+>如果某些容器时区有问题，需要安装包tzdata：  
+>>    apk add -U tzdata
+>>	/usr/bin/docker-entrypoint.sh 第31行时区
+
 >zabbix导入端口自动发现配置文件：  
 >>	port_discovery_templates.xml  
 

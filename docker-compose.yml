@@ -10,7 +10,7 @@ services:
       MYSQL_USER: "root"
       MYSQL_PASSWORD: "mysql57"
     volumes:
-      - /etc/localtime:/etc/localtime:ro
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
     ports:
       - "10051:10051"
     user: root
@@ -31,7 +31,7 @@ services:
       ZBX_SERVER_HOST: "server"
     volumes:
      - ./zabbix/simhei.ttf:/usr/share/zabbix/assets/fonts/DejaVuSans.ttf 
-     - /etc/localtime:/etc/localtime:ro
+     - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
     ports:
      - "10052:80"
     user: root
@@ -52,7 +52,7 @@ services:
      - "10053:3306"
     volumes:
      - ./zabbix/mysql:/var/lib/mysql
-     - /etc/localtime:/etc/localtime:ro
+     - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
     networks:
       default:
         aliases:

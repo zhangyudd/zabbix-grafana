@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 6,
-  "iteration": 1575597947749,
+  "iteration": 1577068498655,
   "links": [],
   "panels": [
     {
@@ -678,32 +678,33 @@
     {
       "aliasColors": {},
       "bars": false,
+      "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 1,
+      "fill": 2,
       "fillGradient": 0,
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 8,
         "x": 0,
         "y": 3
       },
       "hiddenSeries": false,
-      "id": 34,
+      "id": 6,
       "legend": {
         "alignAsTable": true,
         "avg": false,
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": true,
         "show": true,
         "total": false,
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "dataLinks": []
@@ -729,7 +730,7 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "/CPU(.*)time/"
+            "filter": "/Load average/"
           },
           "mode": 0,
           "options": {
@@ -738,6 +739,10 @@
           },
           "refId": "A",
           "resultFormat": "time_series",
+          "slaProperty": {
+            "name": "SLA",
+            "property": "sla"
+          },
           "table": {
             "skipEmptyValues": false
           },
@@ -748,11 +753,22 @@
           }
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "custom",
+          "fill": false,
+          "line": true,
+          "lineColor": "rgb(255, 0, 0)",
+          "op": "gt",
+          "source": "zabbix",
+          "value": 0,
+          "yaxis": "left"
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "CPU使用率",
+      "title": "系统负载",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -790,6 +806,120 @@
       }
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 7,
+        "x": 8,
+        "y": 3
+      },
+      "hiddenSeries": false,
+      "id": 16,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "application": {
+            "filter": ""
+          },
+          "functions": [],
+          "group": {
+            "filter": "$group"
+          },
+          "host": {
+            "filter": "$host"
+          },
+          "item": {
+            "filter": "/Interface eth0: Bits/"
+          },
+          "mode": 0,
+          "options": {
+            "showDisabledItems": false,
+            "skipEmptyValues": false
+          },
+          "refId": "A",
+          "resultFormat": "time_series",
+          "table": {
+            "skipEmptyValues": false
+          },
+          "triggers": {
+            "acknowledged": 2,
+            "count": true,
+            "minSeverity": 3
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "eth0 网络流量",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "cacheTimeout": null,
       "columns": [
         {
@@ -800,9 +930,9 @@
       "datasource": null,
       "fontSize": "90%",
       "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 8,
+        "h": 7,
+        "w": 4,
+        "x": 15,
         "y": 3
       },
       "id": 18,
@@ -829,9 +959,9 @@
         },
         {
           "alias": "数量",
-          "colorMode": null,
+          "colorMode": "value",
           "colors": [
-            "rgba(245, 54, 54, 0.9)",
+            "#73BF69",
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
@@ -922,9 +1052,9 @@
       "datasource": null,
       "fontSize": "90%",
       "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 16,
+        "h": 7,
+        "w": 4,
+        "x": 19,
         "y": 3
       },
       "id": 36,
@@ -1039,33 +1169,32 @@
     {
       "aliasColors": {},
       "bars": false,
-      "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 1,
+      "fill": 2,
       "fillGradient": 0,
       "gridPos": {
         "h": 6,
         "w": 8,
-        "x": 8,
-        "y": 7
+        "x": 0,
+        "y": 10
       },
       "hiddenSeries": false,
-      "id": 6,
+      "id": 34,
       "legend": {
         "alignAsTable": true,
         "avg": false,
         "current": true,
         "max": false,
         "min": false,
+        "rightSide": true,
         "show": true,
         "total": false,
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
-      "links": [],
+      "linewidth": 2,
       "nullPointMode": "null",
       "options": {
         "dataLinks": []
@@ -1091,7 +1220,7 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "/Load average/"
+            "filter": "CPU system time"
           },
           "mode": 0,
           "options": {
@@ -1100,10 +1229,6 @@
           },
           "refId": "A",
           "resultFormat": "time_series",
-          "slaProperty": {
-            "name": "SLA",
-            "property": "sla"
-          },
           "table": {
             "skipEmptyValues": false
           },
@@ -1112,101 +1237,7 @@
             "count": true,
             "minSeverity": 3
           }
-        }
-      ],
-      "thresholds": [
-        {
-          "colorMode": "custom",
-          "fill": false,
-          "line": true,
-          "lineColor": "rgb(255, 0, 0)",
-          "op": "gt",
-          "source": "zabbix",
-          "value": 0
-        }
-      ],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "系统负载",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
         },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 16,
-        "y": 7
-      },
-      "hiddenSeries": false,
-      "id": 16,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
         {
           "application": {
             "filter": ""
@@ -1219,14 +1250,44 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "/Interface eth0: Bits/"
+            "filter": "CPU user time"
           },
           "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
-          "refId": "A",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "table": {
+            "skipEmptyValues": false
+          },
+          "triggers": {
+            "acknowledged": 2,
+            "count": true,
+            "minSeverity": 3
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "functions": [],
+          "group": {
+            "filter": "$group"
+          },
+          "host": {
+            "filter": "$host"
+          },
+          "item": {
+            "filter": "CPU iowait time"
+          },
+          "mode": 0,
+          "options": {
+            "showDisabledItems": false,
+            "skipEmptyValues": false
+          },
+          "refId": "C",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
@@ -1242,7 +1303,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "eth0 网络流量",
+      "title": "CPU 时间",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1258,7 +1319,7 @@
       },
       "yaxes": [
         {
-          "format": "bps",
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1266,7 +1327,7 @@
           "show": true
         },
         {
-          "format": "bps",
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1282,34 +1343,34 @@
     {
       "aliasColors": {},
       "bars": false,
-      "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 1,
+      "fill": 2,
       "fillGradient": 0,
       "gridPos": {
         "h": 6,
-        "w": 8,
-        "x": 0,
-        "y": 13
+        "w": 15,
+        "x": 8,
+        "y": 10
       },
       "hiddenSeries": false,
-      "id": 28,
+      "id": 40,
       "legend": {
         "alignAsTable": true,
-        "avg": true,
+        "avg": false,
         "current": true,
-        "max": true,
-        "min": true,
-        "rightSide": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
         "show": true,
         "total": false,
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
-      "links": [],
+      "linewidth": 2,
       "nullPointMode": "null",
       "options": {
         "dataLinks": []
@@ -1335,7 +1396,7 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "/DISK(.*) Writing milliseconds/"
+            "filter": "TCP_Status_ESTAB建立连接"
           },
           "mode": 0,
           "options": {
@@ -1365,7 +1426,213 @@
             "filter": "$host"
           },
           "item": {
+            "filter": "TCP_Status_LISTEN监听"
+          },
+          "mode": 0,
+          "options": {
+            "showDisabledItems": false,
+            "skipEmptyValues": false
+          },
+          "refId": "B",
+          "resultFormat": "time_series",
+          "table": {
+            "skipEmptyValues": false
+          },
+          "triggers": {
+            "acknowledged": 2,
+            "count": true,
+            "minSeverity": 3
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "functions": [],
+          "group": {
+            "filter": "$group"
+          },
+          "host": {
+            "filter": "$host"
+          },
+          "item": {
+            "filter": "TCP_Status_TIME_WAIT主动关闭方等待状态"
+          },
+          "mode": 0,
+          "options": {
+            "showDisabledItems": false,
+            "skipEmptyValues": false
+          },
+          "refId": "C",
+          "resultFormat": "time_series",
+          "table": {
+            "skipEmptyValues": false
+          },
+          "triggers": {
+            "acknowledged": 2,
+            "count": true,
+            "minSeverity": 3
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "functions": [],
+          "group": {
+            "filter": "$group"
+          },
+          "host": {
+            "filter": "$host"
+          },
+          "item": {
+            "filter": "TCP_Status_SYN_RCVD收到打开"
+          },
+          "mode": 0,
+          "options": {
+            "showDisabledItems": false,
+            "skipEmptyValues": false
+          },
+          "refId": "D",
+          "resultFormat": "time_series",
+          "table": {
+            "skipEmptyValues": false
+          },
+          "triggers": {
+            "acknowledged": 2,
+            "count": true,
+            "minSeverity": 3
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP连接状态",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 28,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "application": {
+            "filter": ""
+          },
+          "functions": [],
+          "group": {
+            "filter": "$group"
+          },
+          "host": {
+            "filter": "$host"
+          },
+          "item": {
             "filter": "/DISK(.*) reading milliseconds/"
+          },
+          "mode": 0,
+          "options": {
+            "showDisabledItems": false,
+            "skipEmptyValues": false
+          },
+          "refId": "A",
+          "resultFormat": "time_series",
+          "table": {
+            "skipEmptyValues": false
+          },
+          "triggers": {
+            "acknowledged": 2,
+            "count": true,
+            "minSeverity": 3
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "functions": [],
+          "group": {
+            "filter": "$group"
+          },
+          "host": {
+            "filter": "$host"
+          },
+          "item": {
+            "filter": "/DISK(.*) Writing milliseconds/"
           },
           "mode": 0,
           "options": {
@@ -1404,7 +1671,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "ms",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1412,7 +1679,7 @@
           "show": true
         },
         {
-          "format": "short",
+          "format": "ms",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1431,19 +1698,19 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 1,
+      "fill": 2,
       "fillGradient": 0,
       "gridPos": {
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 13
+        "y": 16
       },
       "hiddenSeries": false,
       "id": 32,
       "legend": {
         "alignAsTable": true,
-        "avg": true,
+        "avg": false,
         "current": true,
         "max": true,
         "min": true,
@@ -1452,7 +1719,7 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "maxDataPoints": "",
       "nullPointMode": "null",
       "options": {
@@ -1575,19 +1842,19 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 1,
+      "fill": 2,
       "fillGradient": 0,
       "gridPos": {
         "h": 6,
-        "w": 8,
+        "w": 7,
         "x": 16,
-        "y": 13
+        "y": 16
       },
       "hiddenSeries": false,
       "id": 30,
       "legend": {
         "alignAsTable": true,
-        "avg": true,
+        "avg": false,
         "current": true,
         "max": true,
         "min": true,
@@ -1597,7 +1864,7 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "nullPointMode": "null",
       "options": {
         "dataLinks": []
@@ -1724,9 +1991,9 @@
         "allValue": null,
         "current": {
           "tags": [],
-          "text": "Zabbix servers",
+          "text": "Linux servers",
           "value": [
-            "Zabbix servers"
+            "Linux servers"
           ]
         },
         "datasource": "Zabbix",
@@ -1767,9 +2034,10 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "text": "network",
+          "value": [
+            "network"
+          ]
         },
         "datasource": "Zabbix",
         "definition": "$group.*",
@@ -1896,6 +2164,11 @@
             "selected": false,
             "text": "Storage",
             "value": "Storage"
+          },
+          {
+            "selected": false,
+            "text": "TCP",
+            "value": "TCP"
           },
           {
             "selected": false,
@@ -2252,6 +2525,61 @@
           },
           {
             "selected": false,
+            "text": "TCP_Status_CLOSED_WAIT被动关闭",
+            "value": "TCP_Status_CLOSED_WAIT被动关闭"
+          },
+          {
+            "selected": false,
+            "text": "TCP_Status_CLOSED关闭",
+            "value": "TCP_Status_CLOSED关闭"
+          },
+          {
+            "selected": false,
+            "text": "TCP_Status_CLOSING同时关闭",
+            "value": "TCP_Status_CLOSING同时关闭"
+          },
+          {
+            "selected": false,
+            "text": "TCP_Status_ESTAB建立连接",
+            "value": "TCP_Status_ESTAB建立连接"
+          },
+          {
+            "selected": false,
+            "text": "TCP_Status_FIN_WAIT_1主动关闭",
+            "value": "TCP_Status_FIN_WAIT_1主动关闭"
+          },
+          {
+            "selected": false,
+            "text": "TCP_Status_FIN_WAIT_2主动关闭",
+            "value": "TCP_Status_FIN_WAIT_2主动关闭"
+          },
+          {
+            "selected": false,
+            "text": "TCP_Status_LAST_ACK被动关闭方最后的ack",
+            "value": "TCP_Status_LAST_ACK被动关闭方最后的ack"
+          },
+          {
+            "selected": false,
+            "text": "TCP_Status_LISTEN监听",
+            "value": "TCP_Status_LISTEN监听"
+          },
+          {
+            "selected": false,
+            "text": "TCP_Status_SYN_RCVD收到打开",
+            "value": "TCP_Status_SYN_RCVD收到打开"
+          },
+          {
+            "selected": false,
+            "text": "TCP_Status_SYN_SENT主动打开",
+            "value": "TCP_Status_SYN_SENT主动打开"
+          },
+          {
+            "selected": false,
+            "text": "TCP_Status_TIME_WAIT主动关闭方等待状态",
+            "value": "TCP_Status_TIME_WAIT主动关闭方等待状态"
+          },
+          {
+            "selected": false,
             "text": "Total memory",
             "value": "Total memory"
           },
@@ -2565,7 +2893,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -2585,5 +2913,5 @@
   "timezone": "",
   "title": "Zabbix template",
   "uid": "gstqvO-Wk",
-  "version": 65
+  "version": 81
 }

@@ -14,6 +14,10 @@ services:
     ports:
      - "10051:10051"
     user: root
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
     networks:
       default:
         aliases:
@@ -36,6 +40,10 @@ services:
     ports:
       - "10052:80"
     user: root
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
     networks:
       default:
         aliases:
@@ -58,6 +66,10 @@ services:
       default:
         aliases:
           - db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
     deploy:
       resources:
         limits:
@@ -78,6 +90,10 @@ services:
     volumes:
       - ./grafana/plugins:/var/lib/grafana/plugins
       - ./grafana/grafana.db:/var/lib/grafana/grafana.db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
     restart: always
 networks:
     default:

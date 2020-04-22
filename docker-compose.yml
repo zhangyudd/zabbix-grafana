@@ -1,4 +1,4 @@
-version: '2'
+version: '3.7'
 
 services:
   server:
@@ -12,14 +12,15 @@ services:
     volumes:
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
     ports:
-      - "10051:10051"
+     - "10051:10051"
     user: root
     networks:
       default:
         aliases:
           - server
+        ipv4_address: 171.50.0.2
     restart: always
-  
+   
   web:
     image: zabbix/zabbix-web-nginx-mysql:latest
     container_name: zabbix-web
@@ -30,10 +31,10 @@ services:
       MYSQL_PASSWORD: "mysql57"
       ZBX_SERVER_HOST: "server"
     volumes:
-     - ./zabbix/simhei.ttf:/usr/share/zabbix/assets/fonts/DejaVuSans.ttf 
-     - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - ./zabbix/simhei.ttf:/usr/share/zabbix/assets/fonts/DejaVuSans.ttf 
     ports:
-     - "10052:80"
+      - "10052:80"
     user: root
     networks:
       default:
@@ -51,12 +52,20 @@ services:
     ports:
      - "10053:3306"
     volumes:
-     - ./zabbix/mysql:/var/lib/mysql
-     - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - ./zabbix/mysql:/var/lib/mysql
     networks:
       default:
         aliases:
           - db
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 200M
     restart: always
 
   grafana:
@@ -70,3 +79,7 @@ services:
       - ./grafana/plugins:/var/lib/grafana/plugins
       - ./grafana/grafana.db:/var/lib/grafana/grafana.db
     restart: always
+networks:
+    default:
+      external:
+        name: zabbix

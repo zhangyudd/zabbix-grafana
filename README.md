@@ -4,7 +4,8 @@
 
 >部署代码
 >>  `chmod 777 grafana/grafana.db `   
->>  `docker-compose up -d`     
+>>  `docker network create --driver bridge --subnet 171.50.0.0/16 zabbix`
+>>  `docker-compose --compatibility up -d`     
 
 >Zabbix  
 >>	登录ip:10052，帐号为Admin，密码为zabbix  

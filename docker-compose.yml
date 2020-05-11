@@ -11,6 +11,7 @@ services:
       MYSQL_PASSWORD: "mysql57"
     volumes:
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      # - ./zabbix/zabbix_server.conf:/etc/zabbix/zabbix_server.conf   # 配置优化
     ports:
      - "10051:10051"
     user: root

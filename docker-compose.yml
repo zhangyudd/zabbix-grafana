@@ -6,15 +6,15 @@ services:
     container_name: zabbix-server
     environment:
       TZ: Asia/Shanghai
-      DB_SERVER_HOST: "db"
-      MYSQL_USER: "root"
-      MYSQL_PASSWORD: "mysql57"
+      DB_SERVER_HOST: $DB_SERVER_HOST
+      DB_SERVER_PORT: $DB_SERVER_PORT
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
     volumes:
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       # - ./zabbix/zabbix_server.conf:/etc/zabbix/zabbix_server.conf   # 配置优化
     ports:
      - "10051:10051"
-    user: root
     logging:
       driver: "json-file"
       options:
@@ -31,16 +31,16 @@ services:
     container_name: zabbix-web
     environment:
       TZ: Asia/Shanghai
-      DB_SERVER_HOST: "db"
-      MYSQL_USER: "root"
-      MYSQL_PASSWORD: "mysql57"
-      ZBX_SERVER_HOST: "server"
+      DB_SERVER_HOST: $DB_SERVER_HOST
+      DB_SERVER_PORT: $DB_SERVER_PORT
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      ZBX_SERVER_HOST: $ZBX_SERVER_HOST
     volumes:
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       - ./zabbix/simhei.ttf:/usr/share/zabbix/assets/fonts/DejaVuSans.ttf 
     ports:
       - "10052:80"
-    user: root
     logging:
       driver: "json-file"
       options:
@@ -57,7 +57,7 @@ services:
     command: --character-set-server=utf8 --collation-server=utf8_general_ci
     environment:
       TZ: Asia/Shanghai
-      MYSQL_ROOT_PASSWORD: "mysql57"
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
     ports:
      - "10053:3306"
     volumes:

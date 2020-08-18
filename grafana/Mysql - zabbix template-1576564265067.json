@@ -15,14 +15,20 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 13,
-  "iteration": 1576564221711,
+  "id": 5,
+  "iteration": 1597738115306,
   "links": [],
   "panels": [
     {
       "content": "## $host\n\n\n\n",
       "datasource": null,
       "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 3,
         "w": 12,
@@ -31,7 +37,11 @@
       },
       "id": 18,
       "mode": "markdown",
-      "options": {},
+      "options": {
+        "content": "## $host\n\n\n\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "7.1.0",
       "targets": [
         {
           "application": {
@@ -79,6 +89,12 @@
         "#d44a3a"
       ],
       "datasource": "Zabbix",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "s",
       "gauge": {
         "maxValue": 100,
@@ -110,7 +126,6 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "pluginVersion": "6.5.1",
       "postfix": "",
       "postfixFontSize": "50%",
@@ -135,7 +150,7 @@
       "targets": [
         {
           "application": {
-            "filter": ""
+            "filter": "MySQL"
           },
           "functions": [],
           "group": {
@@ -147,15 +162,24 @@
           "item": {
             "filter": "Info: Uptime"
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
           "refId": "A",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
           },
           "triggers": {
             "acknowledged": 2,
@@ -182,11 +206,18 @@
     {
       "columns": [
         {
+          "$$hashKey": "object:103",
           "text": "Current",
           "value": "current"
         }
       ],
-      "datasource": null,
+      "datasource": "Zabbix",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fontSize": "100%",
       "gridPos": {
         "h": 3,
@@ -195,7 +226,6 @@
         "y": 0
       },
       "id": 2,
-      "options": {},
       "pageSize": null,
       "pluginVersion": "6.5.1",
       "showHeader": true,
@@ -206,6 +236,7 @@
       "styles": [
         {
           "alias": "状态(1-正常,0-宕机)",
+          "align": "auto",
           "colorMode": "value",
           "colors": [
             "#73BF69",
@@ -223,6 +254,7 @@
         },
         {
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -251,15 +283,24 @@
           "item": {
             "filter": "Availability: MySQL status"
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
           "refId": "A",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
           },
           "triggers": {
             "acknowledged": 2,
@@ -272,14 +313,21 @@
       "timeShift": null,
       "title": "数据库状态",
       "transform": "timeseries_aggregations",
-      "type": "table"
+      "type": "table-old"
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Zabbix",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -304,10 +352,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -318,7 +364,7 @@
       "targets": [
         {
           "application": {
-            "filter": ""
+            "filter": "MySQL"
           },
           "functions": [],
           "group": {
@@ -328,17 +374,143 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "/Throughput: Command/"
+            "filter": "Throughput: Command Insert per second"
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
           "refId": "A",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
+          },
+          "triggers": {
+            "acknowledged": 2,
+            "count": true,
+            "minSeverity": 3
+          }
+        },
+        {
+          "application": {
+            "filter": "MySQL"
+          },
+          "functions": [],
+          "group": {
+            "filter": "$group"
+          },
+          "host": {
+            "filter": "$host"
+          },
+          "item": {
+            "filter": "Throughput: Command Delete per second"
+          },
+          "options": {
+            "showDisabledItems": false,
+            "skipEmptyValues": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
+          },
+          "triggers": {
+            "acknowledged": 2,
+            "count": true,
+            "minSeverity": 3
+          }
+        },
+        {
+          "application": {
+            "filter": "MySQL"
+          },
+          "functions": [],
+          "group": {
+            "filter": "$group"
+          },
+          "host": {
+            "filter": "$host"
+          },
+          "item": {
+            "filter": "Throughput: Command Update per second"
+          },
+          "options": {
+            "showDisabledItems": false,
+            "skipEmptyValues": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
+          "refId": "C",
+          "resultFormat": "time_series",
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
+          },
+          "triggers": {
+            "acknowledged": 2,
+            "count": true,
+            "minSeverity": 3
+          }
+        },
+        {
+          "application": {
+            "filter": "MySQL"
+          },
+          "functions": [],
+          "group": {
+            "filter": "$group"
+          },
+          "host": {
+            "filter": "$host"
+          },
+          "item": {
+            "filter": "Throughput: Command Select per second"
+          },
+          "options": {
+            "showDisabledItems": false,
+            "skipEmptyValues": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
+          "refId": "D",
+          "resultFormat": "time_series",
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
           },
           "triggers": {
             "acknowledged": 2,
@@ -393,7 +565,14 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Zabbix",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -418,10 +597,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -432,37 +609,7 @@
       "targets": [
         {
           "application": {
-            "filter": ""
-          },
-          "functions": [],
-          "group": {
-            "filter": "$group"
-          },
-          "host": {
-            "filter": "$host"
-          },
-          "item": {
-            "filter": "Performance: Slow queries per second"
-          },
-          "mode": 0,
-          "options": {
-            "showDisabledItems": false,
-            "skipEmptyValues": false
-          },
-          "refId": "A",
-          "resultFormat": "time_series",
-          "table": {
-            "skipEmptyValues": false
-          },
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          }
-        },
-        {
-          "application": {
-            "filter": ""
+            "filter": "MySQL"
           },
           "functions": [],
           "group": {
@@ -474,15 +621,24 @@
           "item": {
             "filter": "Throughput: Queries per second"
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
-          "refId": "B",
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
+          "refId": "A",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
           },
           "triggers": {
             "acknowledged": 2,
@@ -492,7 +648,7 @@
         },
         {
           "application": {
-            "filter": ""
+            "filter": "MySQL"
           },
           "functions": [],
           "group": {
@@ -502,17 +658,26 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "Throughput: Questions per second"
+            "filter": "Performance: Slow queries per second"
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
-          "refId": "C",
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
+          "refId": "B",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
           },
           "triggers": {
             "acknowledged": 2,
@@ -569,7 +734,14 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Zabbix",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -594,10 +766,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -608,7 +778,7 @@
       "targets": [
         {
           "application": {
-            "filter": ""
+            "filter": "MySQL"
           },
           "functions": [],
           "group": {
@@ -618,17 +788,26 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "/Threads/"
+            "filter": "/Connections: Threads (.*)/"
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
           "refId": "A",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
           },
           "triggers": {
             "acknowledged": 2,
@@ -683,7 +862,14 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Zabbix",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -710,10 +896,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
+      "percentage": true,
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -724,7 +908,7 @@
       "targets": [
         {
           "application": {
-            "filter": ""
+            "filter": "MySQL"
           },
           "functions": [],
           "group": {
@@ -734,18 +918,27 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "Connections: Aborted clients per second"
+            "filter": "/Connections: Connection(.*)/"
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
           "refId": "A",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
           },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
+          },
           "triggers": {
             "acknowledged": 2,
             "count": true,
@@ -754,7 +947,7 @@
         },
         {
           "application": {
-            "filter": ""
+            "filter": "MySQL"
           },
           "functions": [],
           "group": {
@@ -764,18 +957,27 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "Connections: Aborted connections per second"
+            "filter": "/Connections: Aborted (.*)/"
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
           "refId": "B",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
           },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
+          },
           "triggers": {
             "acknowledged": 2,
             "count": true,
@@ -784,7 +986,7 @@
         },
         {
           "application": {
-            "filter": ""
+            "filter": "MySQL"
           },
           "functions": [],
           "group": {
@@ -794,47 +996,26 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "Connections: Connections per second"
+            "filter": ""
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
           "refId": "C",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
           },
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          }
-        },
-        {
-          "application": {
+          "tags": {
             "filter": ""
           },
-          "functions": [],
-          "group": {
-            "filter": "$group"
-          },
-          "host": {
-            "filter": "$host"
-          },
-          "item": {
-            "filter": "Connections: Max used connections"
-          },
-          "mode": 0,
-          "options": {
-            "showDisabledItems": false,
-            "skipEmptyValues": false
-          },
-          "refId": "D",
-          "resultFormat": "time_series",
-          "table": {
-            "skipEmptyValues": false
+          "trigger": {
+            "filter": ""
           },
           "triggers": {
             "acknowledged": 2,
@@ -843,17 +1024,7 @@
           }
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "custom",
-          "fill": false,
-          "line": true,
-          "lineColor": "rgb(255, 0, 0)",
-          "op": "gt",
-          "source": "zabbix",
-          "value": null
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -899,7 +1070,14 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Zabbix",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -926,10 +1104,8 @@
       "linewidth": 1,
       "maxDataPoints": "",
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -940,7 +1116,7 @@
       "targets": [
         {
           "application": {
-            "filter": ""
+            "filter": "MySQL"
           },
           "functions": [],
           "group": {
@@ -950,17 +1126,26 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "/Throughput: Bytes /"
+            "filter": "/Throughput: Bytes(.*)/"
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
           "refId": "A",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
           },
           "triggers": {
             "acknowledged": 2,
@@ -1016,7 +1201,14 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Zabbix",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1041,10 +1233,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1055,7 +1245,7 @@
       "targets": [
         {
           "application": {
-            "filter": ""
+            "filter": "MySQL"
           },
           "functions": [],
           "group": {
@@ -1065,17 +1255,26 @@
             "filter": "$host"
           },
           "item": {
-            "filter": "/Performance: InnoDB buffer pool/"
+            "filter": "/Performance: InnoDB buffer(.*)/"
           },
-          "mode": 0,
           "options": {
             "showDisabledItems": false,
             "skipEmptyValues": false
           },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": 0,
           "refId": "A",
           "resultFormat": "time_series",
           "table": {
             "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "trigger": {
+            "filter": ""
           },
           "triggers": {
             "acknowledged": 2,
@@ -1127,7 +1326,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 21,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1135,8 +1334,11 @@
       {
         "allValue": null,
         "current": {
-          "text": "Linux servers",
-          "value": "Linux servers"
+          "selected": false,
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "Zabbix",
         "definition": "*",
@@ -1161,8 +1363,11 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": "All",
-          "value": "$__all"
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "Zabbix",
         "definition": "$group.*",
@@ -1173,24 +1378,49 @@
         "name": "host",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "All",
             "value": "$__all"
           },
           {
-            "selected": true,
-            "text": "52shisu.com",
-            "value": "52shisu.com"
+            "selected": false,
+            "text": "PokerGameServer",
+            "value": "PokerGameServer"
           },
           {
             "selected": false,
-            "text": "Zabbix server",
-            "value": "Zabbix server"
+            "text": "PokerMgr",
+            "value": "PokerMgr"
+          },
+          {
+            "selected": false,
+            "text": "PokerMysql",
+            "value": "PokerMysql"
+          },
+          {
+            "selected": false,
+            "text": "PokerNginx",
+            "value": "PokerNginx"
           },
           {
             "selected": false,
             "text": "network",
             "value": "network"
+          },
+          {
+            "selected": false,
+            "text": "尸溯-重返现场",
+            "value": "尸溯-重返现场"
+          },
+          {
+            "selected": false,
+            "text": "禅道",
+            "value": "禅道"
+          },
+          {
+            "selected": false,
+            "text": "预发布-pokerclubs",
+            "value": "预发布-pokerclubs"
           }
         ],
         "query": "$group.*",
@@ -1207,7 +1437,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {

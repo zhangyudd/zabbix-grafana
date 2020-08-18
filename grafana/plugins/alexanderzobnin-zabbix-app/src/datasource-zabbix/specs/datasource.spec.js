@@ -2,6 +2,13 @@ import _ from 'lodash';
 import mocks from '../../test-setup/mocks';
 import { Datasource } from "../module";
 import { zabbixTemplateFormat } from "../datasource";
+import { dateMath } from '@grafana/data';
+
+jest.mock('@grafana/runtime', () => ({
+  getBackendSrv: () => ({
+    datasourceRequest: jest.fn().mockResolvedValue({data: {result: ''}}),
+  }),
+}), {virtual: true});
 
 describe('ZabbixDatasource', () => {
   let ctx = {};
@@ -20,11 +27,11 @@ describe('ZabbixDatasource', () => {
     };
 
     ctx.templateSrv = mocks.templateSrvMock;
-    ctx.backendSrv = mocks.backendSrvMock;
+    // ctx.backendSrv = mocks.backendSrvMock;
     ctx.datasourceSrv = mocks.datasourceSrvMock;
     ctx.zabbixAlertingSrv = mocks.zabbixAlertingSrvMock;
 
-    ctx.ds = new Datasource(ctx.instanceSettings, ctx.templateSrv, ctx.backendSrv, ctx.datasourceSrv, ctx.zabbixAlertingSrv);
+    ctx.ds = new Datasource(ctx.instanceSettings, ctx.templateSrv, ctx.zabbixAlertingSrv);
   });
 
   describe('When querying data', () => {
@@ -41,7 +48,10 @@ describe('ZabbixDatasource', () => {
           item: {filter: ""}
         }
       ],
-      range: {from: 'now-7d', to: 'now'}
+      range: {
+        from: dateMath.parse('now-1h'),
+        to: dateMath.parse('now')
+      }
     };
 
     it('should return an empty array when no targets are set', (done) => {
@@ -59,7 +69,7 @@ describe('ZabbixDatasource', () => {
       let ranges = ['now-8d', 'now-169h', 'now-1M', 'now-1y'];
 
       _.forEach(ranges, range => {
-        ctx.options.range.from = range;
+        ctx.options.range.from = dateMath.parse(range);
         ctx.ds.queryNumericData = jest.fn();
         ctx.ds.query(ctx.options);
 
@@ -76,7 +86,7 @@ describe('ZabbixDatasource', () => {
       let ranges = ['now-7d', 'now-168h', 'now-1h', 'now-30m', 'now-30s'];
 
       _.forEach(ranges, range => {
-        ctx.options.range.from = range;
+        ctx.options.range.from = dateMath.parse(range);
         ctx.ds.queryNumericData = jest.fn();
         ctx.ds.query(ctx.options);
 
@@ -108,24 +118,19 @@ describe('ZabbixDatasource', () => {
         }
       ]));
 
-      ctx.options = {
-        range: {from: 'now-1h', to: 'now'},
-        targets: [
-          {
-            group: {filter: ""},
-            host: {filter: "Zabbix server"},
-            application: {filter: ""},
-            item: {filter: "System information"},
-            textFilter: "",
-            useCaptureGroups: true,
-            mode: 2,
-            resultFormat: "table",
-            options: {
-              skipEmptyValues: false
-            }
-          }
-        ],
-      };
+      ctx.options.targets = [{
+        group: {filter: ""},
+        host: {filter: "Zabbix server"},
+        application: {filter: ""},
+        item: {filter: "System information"},
+        textFilter: "",
+        useCaptureGroups: true,
+        queryType: 2,
+        resultFormat: "table",
+        options: {
+          skipEmptyValues: false
+        }
+      }];
     });
 
     it('should return data in table format', (done) => {
@@ -232,7 +237,7 @@ describe('ZabbixDatasource', () => {
     });
   });
 
-  describe('When invoking metricFindQuery()', () => {
+  describe('When invoking metricFindQuery() with legacy query', () => {
     beforeEach(() => {
       ctx.ds.replaceTemplateVars = (str) => str;
       ctx.ds.zabbix = {
@@ -246,7 +251,6 @@ describe('ZabbixDatasource', () => {
     it('should return groups', (done) => {
       const tests = [
         {query: '*',        expect: '/.*/'},
-        {query: '',         expect: ''},
         {query: 'Backend',  expect: 'Backend'},
         {query: 'Back*',    expect: 'Back*'},
       ];
@@ -257,6 +261,16 @@ describe('ZabbixDatasource', () => {
         ctx.ds.zabbix.getGroups.mockClear();
       }
       done();
+    });
+
+    it('should return empty list for empty query', (done) => {
+      ctx.ds.metricFindQuery('').then(result => {
+        expect(ctx.ds.zabbix.getGroups).toBeCalledTimes(0);
+        ctx.ds.zabbix.getGroups.mockClear();
+
+        expect(result).toEqual([]);
+        done();
+      });
     });
 
     it('should return hosts', (done) => {

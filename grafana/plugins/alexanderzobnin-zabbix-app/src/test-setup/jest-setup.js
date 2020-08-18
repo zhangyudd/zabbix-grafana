@@ -2,7 +2,9 @@
 /* globals global: false */
 
 import { JSDOM } from 'jsdom';
-import { PanelCtrl } from './panelStub';
+import { PanelCtrl, MetricsPanelCtrl } from './panelStub';
+
+console.log = () => {};
 
 // Mock Grafana modules that are not available outside of the core project
 // Required for loading module.js
@@ -18,18 +20,33 @@ jest.mock('angular', () => {
   };
 }, {virtual: true});
 
+jest.mock('@grafana/runtime', () => {
+  return {
+    getBackendSrv: () => ({
+      datasourceRequest: jest.fn().mockResolvedValue(),
+    }),
+  };
+}, {virtual: true});
+
 jest.mock('grafana/app/core/core_module', () => {
   return {
     directive: function() {},
   };
 }, {virtual: true});
 
-let mockPanelCtrl = PanelCtrl;
+jest.mock('grafana/app/core/core', () => ({
+  contextSrv: {},
+}), {virtual: true});
+
+const mockPanelCtrl = PanelCtrl;
+const mockMetricsPanelCtrl = MetricsPanelCtrl;
+
 jest.mock('grafana/app/plugins/sdk', () => {
   return {
     QueryCtrl: null,
     loadPluginCss: () => {},
-    PanelCtrl: mockPanelCtrl
+    PanelCtrl: mockPanelCtrl,
+    MetricsPanelCtrl: mockMetricsPanelCtrl,
   };
 }, {virtual: true});
 
@@ -45,6 +62,7 @@ jest.mock('grafana/app/core/utils/datemath', () => {
 jest.mock('grafana/app/core/utils/kbn', () => {
   return {
     round_interval: n => n,
+    secondsToHms: n => n + 'ms'
   };
 }, {virtual: true});
 
@@ -74,9 +92,9 @@ jest.mock('grafana/app/core/config', () => {
 
 jest.mock('jquery', () => 'module not found', {virtual: true});
 
-jest.mock('@grafana/ui', () => {
-  return {};
-}, {virtual: true});
+// jest.mock('@grafana/ui', () => {
+//   return {};
+// }, {virtual: true});
 
 // Required for loading angularjs
 let dom = new JSDOM('<html><head><script></script></head><body></body></html>');
@@ -84,3 +102,7 @@ let dom = new JSDOM('<html><head><script></script></head><body></body></html>');
 global.window = dom.window;
 global.document = global.window.document;
 global.Node = window.Node;
+
+// Mock Canvas.getContext(), fixes
+// Error: Not implemented: HTMLCanvasElement.prototype.getContext (without installing the canvas npm package)
+window.HTMLCanvasElement.prototype.getContext = () => {};

@@ -11,8 +11,8 @@
     },
     "keywords": ["zabbix"],
     "logos": {
-      "small": "img/zabbix_app_logo.svg",
-      "large": "img/zabbix_app_logo.svg"
+      "small": "img/icn-zabbix-app.svg",
+      "large": "img/icn-zabbix-app.svg"
     },
     "links": [
       {"name": "GitHub", "url": "https://github.com/alexanderzobnin/grafana-zabbix"},
@@ -26,18 +26,18 @@
       {"name": "Metric Editor", "path": "img/screenshot-metric_editor.png"},
       {"name": "Triggers", "path": "img/screenshot-triggers.png"}
     ],
-    "version": "3.10.4",
-    "updated": "2019-08-08"
+    "version": "3.12.4",
+    "updated": "2020-07-28"
   },
 
   "includes": [
     {
       "type": "datasource",
-      "name": "Zabbix Datasource"
+      "name": "Zabbix data source"
     },
     {
       "type": "panel",
-      "name": "Triggers Panel"
+      "name": "Problems panel"
     }
   ],
 

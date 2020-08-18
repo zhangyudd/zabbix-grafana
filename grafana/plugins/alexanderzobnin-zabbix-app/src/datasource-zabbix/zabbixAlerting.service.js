@@ -14,8 +14,11 @@ class ZabbixAlertingService {
   }
 
   setPanelAlertState(panelId, alertState) {
-    let panelIndex;
+    if (!alertState) {
+      return;
+    }
 
+    let panelIndex;
     let panelContainers = _.filter($('.panel-container'), elem => {
       return elem.clientHeight && elem.clientWidth;
     });

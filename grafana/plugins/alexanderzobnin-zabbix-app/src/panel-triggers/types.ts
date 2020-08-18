@@ -1,7 +1,7 @@
 export interface ProblemsPanelOptions {
   schemaVersion: number;
   datasources: any[];
-  targets: Map<string, ProblemsPanelTarget>;
+  targets: ProblemsPanelTarget[];
   // Fields
   hostField?: boolean;
   hostTechNameField?: boolean;
@@ -11,6 +11,7 @@ export interface ProblemsPanelOptions {
   statusField?: boolean;
   statusIcon?: boolean;
   severityField?: boolean;
+  ackField?: boolean;
   ageField?: boolean;
   descriptionField?: boolean;
   descriptionAtNewLine?: boolean;
@@ -62,6 +63,7 @@ export interface ProblemsPanelTarget {
   proxy: {
     filter: string
   };
+  datasource: string;
 }
 
 export interface TriggerSeverity {
@@ -139,6 +141,7 @@ export interface ZBXEvent {
   object?: string;
   objectid?: string;
   acknowledged?: string;
+  severity?: string;
   hosts?: ZBXHost[];
   acknowledges?: ZBXAcknowledge[];
 }

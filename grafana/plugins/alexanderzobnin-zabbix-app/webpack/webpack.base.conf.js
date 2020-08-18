@@ -15,9 +15,9 @@ module.exports = {
   target: 'node',
   context: resolve('src'),
   entry: {
-    './module': './module.js',
-    'components/config': './components/config.js',
-    'datasource-zabbix/module': './datasource-zabbix/module.js',
+    'module': './module.js',
+    'app_config_ctrl/config': './app_config_ctrl/config.js',
+    'datasource-zabbix/module': './datasource-zabbix/module.ts',
     'panel-triggers/module': './panel-triggers/module.js',
   },
   output: {
@@ -27,8 +27,8 @@ module.exports = {
   },
   externals: [
     // remove the line below if you don't want to use builtin versions
-    'jquery', 'lodash', 'moment', 'angular',
-    'react', 'react-dom', '@grafana/ui',
+    'jquery', 'lodash', 'moment', 'angular', 'emotion',
+    'react', 'react-dom', '@grafana/ui', '@grafana/data', '@grafana/runtime',
     function (context, request, callback) {
       var prefix = 'grafana/';
       if (request.indexOf(prefix) === 0) {
@@ -42,6 +42,7 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: '**/plugin.json' },
       { from: '**/*.html' },
+      { from: '**/*.md' },
       { from: 'dashboards/*' },
       { from: '../README.md' },
       { from: '**/img/*' },
@@ -63,7 +64,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           query: {
-            presets: ['babel-preset-env']
+            presets: ['@babel/preset-env']
           }
         }
       },

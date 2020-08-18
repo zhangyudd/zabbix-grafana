@@ -1,6 +1,23 @@
 Functions reference
 ===================
 
+## Functions Variables
+
+There are some built-in template variables available for using in functions:
+
+- `$__range_ms` - panel time range in ms
+- `$__range_s` - panel time range in seconds
+- `$__range` - panel time range, string representation (`30s`, `1m`, `1h`)
+- `$__range_series` - invoke function over all series values
+
+Examples:
+```
+groupBy($__range, avg)
+percentile($__range_series, 95) - 95th percentile over all values
+```
+
+---
+
 ## Transform
 
 
@@ -10,7 +27,7 @@ Functions reference
 groupBy(interval, function)
 ```
 
-Takes each timeseries and consolidate its points falled in given _interval_ into one point using _function_, which can be one of: _avg_, _min_, _max_, _median_.
+Takes each timeseries and consolidate its points fallen in the given _interval_ into one point using _function_, which can be one of: _avg_, _min_, _max_, _median_.
 
 Examples:
 ```
@@ -88,6 +105,19 @@ calculates moving average over 60 points (if metric has 1 second resolution it m
 ```
 ---
 
+### _percentile_
+```
+percentile(interval, N)
+```
+Takes a series of values and a window size and consolidate all its points fallen in the given _interval_ into one point by Nth percentile.
+
+Examples:
+```
+percentile(1h, 99)
+percentile($__range_series, 95) - 95th percentile over all series values
+```
+---
+
 ### _removeAboveValue_
 ```
 removeAboveValue(N)
@@ -124,7 +154,7 @@ Replaces `null` values with N
 aggregateBy(interval, function)
 ```
 
-Takes all timeseries and consolidate all its points falled in given _interval_ into one point using _function_, which can be one of: _avg_, _min_, _max_, _median_.
+Takes all timeseries and consolidate all its points fallen in the given _interval_ into one point using _function_, which can be one of: _avg_, _min_, _max_, _median_.
 
 Examples:
 ```
@@ -139,6 +169,20 @@ sumSeries()
 ```
 
 This will add metrics together and return the sum at each datapoint. This method required interpolation of each timeseries so it may cause high CPU load. Try to combine it with _groupBy()_ function to reduce load.
+
+---
+
+### _percentileAgg_
+```
+percentileAgg(interval, N)
+```
+Takes all timeseries and consolidate all its points fallen in the given _interval_ into one point by Nth percentile.
+
+Examples:
+```
+percentileAgg(1h, 99)
+percentileAgg($__range_series, 95) - 95th percentile over all values
+```
 
 ---
 
@@ -225,6 +269,20 @@ timeShift(+1d)  - shift metric forward in 1 day
 
 ## Alias
 
+Following template variables available for using in `setAlias()` and `replaceAlias()` functions:
+
+- `$__zbx_item`, `$__zbx_item_name` - item name
+- `$__zbx_item_key` - item key
+- `$__zbx_host_name` - visible name of the host
+- `$__zbx_host` - technical name of the host
+
+Examples:
+```
+setAlias($__zbx_host_name: $__zbx_item) -> backend01: CPU user time
+setAlias(Item key: $__zbx_item_key) -> Item key: system.cpu.load[percpu,avg1]
+setAlias($__zbx_host_name) -> backend01
+```
+
 ### _setAlias_
 ```
 setAlias(alias)
@@ -266,7 +324,7 @@ Replace metric name using pattern. Pattern is regex or regular string. If regex 
 |$'	| Inserts the portion of the string that follows the matched substring. |
 |$n	| Where n is a non-negative integer less than 100, inserts the nth parenthesized submatch string, provided the first argument was a RegExp object. |
 
-For more detais see [String.prototype.replace()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) function.
+For more details see [String.prototype.replace()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) function.
 
 Examples:
 ```
